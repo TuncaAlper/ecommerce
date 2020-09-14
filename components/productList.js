@@ -2,11 +2,10 @@ import React from "react";
 import styles from '../styles/ProductList.module.css'
 import buttonStyle from '../styles/Button.module.css'
 
-import data from './data.json'
 import formatCurrency from './util'
 
-function ProductList() {
-  const products = data.products
+function ProductList(props) {
+  const products = props.products
   return (
     <div >
       <ul className={styles.products}>

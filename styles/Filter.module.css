@@ -1,0 +1,11 @@
+.filterContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: 1rem;
+    border-bottom: .1rem #c0c0c0 solid;
+}
+
+.filterDiv {
+    flex: 1;
+}

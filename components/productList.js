@@ -5,7 +5,7 @@ import buttonStyle from '../styles/Button.module.css'
 import formatCurrency from './util'
 
 function ProductList(props) {
-  const products = props.products
+  const { products, addToCart } = props
   return (
     <div >
       <ul className={styles.products}>
@@ -18,7 +18,12 @@ function ProductList(props) {
               </a>
               <div className={styles.productPrice}>
                 <div>{formatCurrency(product.price)}</div>
-                <button className={buttonStyle.primary}>Add To Cart</button>
+                <button
+                  className={buttonStyle.primary}
+                  onClick={() => addToCart(product)}
+                >
+                  Add To Cart
+                </button>
               </div>
             </div>
           </li>

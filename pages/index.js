@@ -5,11 +5,13 @@ import styles from '../styles/Index.module.css'
 import ProductList from '../components/productList'
 import Filter from '../components/filter'
 import data from '../components/data.json'
+import Cart from '../components/cart'
 
 export default function Home() {
   const [products, setProducts] = useState(data.products)
   const [sort, setSort] = useState("")
   const [size, setSize] = useState("All")
+  const [cartItems, setCartItems] = useState([])
 
   const filterProducts = (e) => {
     const value = e.target.value
@@ -33,7 +35,24 @@ export default function Home() {
           ((a._id < b._id) ? 1 : -1)
     )))
   }
-
+  const addToCart = (product) => {
+    const cartItemsCopy = cartItems.slice()
+    let alreadyInCart = false
+    cartItemsCopy.forEach((item) => {
+      if (item._id === product._id) {
+        item.count++
+        alreadyInCart = true
+      }
+    })
+    if (!alreadyInCart) {
+      cartItemsCopy.push({ ...product, count: 1 })
+    }
+    setCartItems(cartItemsCopy)
+  }
+  const removeFromCart = (product) => {
+    const cartItemsCopy = cartItems.slice()
+    setCartItems(cartItemsCopy.filter(r => r._id !== product._id))
+  }
   return (
     <div className={styles.gridContainer}>
       <Head>
@@ -53,11 +72,17 @@ export default function Home() {
               filterProducts={filterProducts}
               sortProducts={sortProducts}
             />
-            <ProductList products={products} />
+            <ProductList
+              products={products}
+              addToCart={addToCart}
+            />
           </div>
           <div className={styles.sidebar}>
-            Cart Items
-        </div>
+            <Cart
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+            />
+          </div>
         </div>
       </main>
       <footer >

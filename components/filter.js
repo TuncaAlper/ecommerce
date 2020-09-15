@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../styles/Filter.module.css'
 import cx from 'classnames'
+
 const Filter = (props) => {
     return (
         <div className={styles.filterContainer} >
